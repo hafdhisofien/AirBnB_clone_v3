@@ -59,7 +59,7 @@ def create_place(city_id):
         return jsonify({'error': 'Missing name'}), 400
     kwargs['city_id'] = city_id
     place = Place(**all_places)
-    place.save()
+    storage.save()
     return jsonify(place.to_dict()), 201
 
 
@@ -75,5 +75,5 @@ def update_place(place_id):
         if attr not in ['id', 'user_id', 'city_id', 'created_at',
                         'updated_at']:
             setattr(place, attr, val)
-    place.save()
+    storage.save()
     return jsonify(place.to_dict()), 200
