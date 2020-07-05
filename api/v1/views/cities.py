@@ -63,8 +63,6 @@ def update_city(city_id):
         abort(404)
     if not request.json:
         abort(400, "Not a JSON")
-    for attr, val in request.get_json().items():
-        if attr not in ['id', 'state_id', 'created_at', 'updated_at']:
-            setattr(city, attr, val)
+    city.name = request.json['name']
     city.save()
     return jsonify(city.to_dict()), 200
